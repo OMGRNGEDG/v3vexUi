@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.7.9",
     "vue": "^3.5.0",
+    "vue-router": "^4.5.0",
     "vxe-table": "^4.0.0",
     "xe-utils": "^3.5.0"
   },

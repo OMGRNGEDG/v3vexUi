@@ -38,3 +38,15 @@ createApp(App).use(VXETable).mount('#app')
 
 官方安装与 useTable 文档：[`https://vxetable.cn/v4/#/start/useTable/install`](https://vxetable.cn/v4/#/start/useTable/install)
 
+## 路由与鉴权
+
+- 路由入口：`src/router/index.ts`
+- 鉴权逻辑：`src/auth/auth.ts`
+  - 未登录访问 `meta.requiresAuth` 页面会被重定向到 `/login?redirect=...`
+  - 登录成功后会回跳到 `redirect` 指定的地址
+
+## Axios 请求封装
+
+- 请求封装：`src/api/http.ts`
+- baseURL：可在 `.env` 里配置 `VITE_API_BASE_URL`
+- 自动带 token：从 `useAuth().state.token` 读取并注入 `Authorization: Bearer <token>`

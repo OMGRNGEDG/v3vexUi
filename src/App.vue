@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import VxeTableDemo from './views/VxeTableDemo.vue'
+import { useAuth } from '@/auth/auth'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const auth = useAuth()
+const router = useRouter()
+const route = useRoute()
+
+const username = computed(() => auth.state.user?.username ?? '')
+
+function onLogout() {
+  auth.logout()
+  router.push({ name: 'login', query: { redirect: route.fullPath } })
+}
 </script>
 
 <template>
   <div class="app">
-    <header class="header">
-      <h1 class="title">Vite + Vue3 + TS + vxe-table（按需引入）</h1>
-      <p class="desc">
-        组件通过 <code>unplugin-vue-components</code> 自动解析导入；样式在 <code>main.ts</code> 里引入。
-      </p>
-    </header>
-
     <main class="main">
-      <VxeTableDemo />
+      <router-view />
     </main>
   </div>
 </template>
@@ -42,6 +48,32 @@ import VxeTableDemo from './views/VxeTableDemo.vue'
   border: 1px solid #eee;
   border-radius: 10px;
   background: #fff;
+}
+.actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user {
+  font-size: 13px;
+  color: #333;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fafafa;
+  color: #111;
+  text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #f3f3f3;
 }
 </style>
 

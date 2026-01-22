@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
+import path from 'node:path'
 
 /**
  * vxe-table 按需引入（不依赖额外 resolver 包，直接用自定义 resolver）
@@ -32,6 +33,11 @@ function vxeTableResolver(componentName: string) {
 }
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
   plugins: [
     vue(),
     Components({
